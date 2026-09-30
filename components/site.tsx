@@ -257,7 +257,7 @@ export function Methodology() {
 }
 
 export function Cases() {
-  const [featuredCase, ...placeholderCases] = cases;
+  const [featuredCase, habanosCase, ...placeholderCases] = cases;
   return (
     <section className="section cases-section" id="cases"><div className="container"><div className="section-top"><SectionHeading eyebrow="КЕЙСЫ" title="Результат важнее обещаний." description="Публикуем только те кейсы, где можно показать подтверждённую задачу, работу и эффект без приукрашивания." /><span className="soon-label">Материалы пополняются</span></div>
       <article className="featured-case">
@@ -277,7 +277,28 @@ export function Cases() {
           <div className="case-flow-badge"><span>PHOTO / TEXT</span><ArrowRight/><span>AI ANALYSIS</span><ArrowRight/><span>DAILY SUMMARY</span></div>
         </div>
       </article>
-      <div className="cases-grid placeholder-cases">{placeholderCases.map((item, index) => <article className="case-card" key={item.slug}><div className="case-cover"><span>0{index + 2}</span><div className="case-lines"><i/><i/><i/><i/></div><small>CASE SOON</small></div><div className="case-body"><span>{item.industry}</span><h3>{item.title}</h3><dl><div><dt>Задача</dt><dd>{item.challenge}</dd></div><div><dt>Сделали</dt><dd>{item.solution}</dd></div><div><dt>Результат</dt><dd>{item.results}</dd></div></dl><span className="case-status"><Clock3 /> Кейс скоро появится</span></div></article>)}</div></div>
+      <article className="featured-case habanos-case">
+        <div className="featured-case-copy">
+          <div className="featured-case-label"><span>02 · УСПЕШНЫЙ КЕЙС</span><small>{habanosCase.industry}</small></div>
+          <h3>{habanosCase.title}</h3>
+          <p className="featured-case-intro">Персонажи, креативы и лендинг, объединённые в одну коммуникационную систему для двух рынков.</p>
+          <dl>
+            <div><dt>Задача</dt><dd>{habanosCase.challenge}</dd></div>
+            <div><dt>Что сделали</dt><dd>{habanosCase.solution}</dd></div>
+            <div><dt>Результат</dt><dd>{habanosCase.results}</dd></div>
+          </dl>
+          {habanosCase.liveUrl && <a className="case-live-link habanos-link" href={habanosCase.liveUrl} target="_blank" rel="noreferrer">{habanosCase.liveLabel}<ExternalLink /></a>}
+        </div>
+        <div className="habanos-showcase">
+          <div className="habanos-videos">
+            {habanosCase.videos?.map((video, index) => <figure key={video.src}><video controls playsInline preload="metadata" poster={video.poster} aria-label={video.alt}><source src={video.src} type="video/x-m4v" /></video><figcaption>VIDEO CREATIVE · 0{index + 1}</figcaption></figure>)}
+          </div>
+          <div className="habanos-static-strip" aria-label="Статичные креативы кампании">
+            {habanosCase.gallery?.map((image, index) => <figure key={image.src}><img src={image.src} alt={image.alt} width={image.width} height={image.height} loading="lazy"/><figcaption>STATIC · 0{index + 1}</figcaption></figure>)}
+          </div>
+        </div>
+      </article>
+      <div className="cases-grid placeholder-cases">{placeholderCases.map((item, index) => <article className="case-card" key={item.slug}><div className="case-cover"><span>0{index + 3}</span><div className="case-lines"><i/><i/><i/><i/></div><small>CASE SOON</small></div><div className="case-body"><span>{item.industry}</span><h3>{item.title}</h3><dl><div><dt>Задача</dt><dd>{item.challenge}</dd></div><div><dt>Сделали</dt><dd>{item.solution}</dd></div><div><dt>Результат</dt><dd>{item.results}</dd></div></dl><span className="case-status"><Clock3 /> Кейс скоро появится</span></div></article>)}</div></div>
     </section>
   );
 }

@@ -87,6 +87,7 @@ export type CaseStudy = {
   results: string;
   image: string;
   gallery?: { src: string; alt: string; width: number; height: number }[];
+  videos?: { src: string; poster: string; alt: string }[];
   liveUrl?: string;
   liveLabel?: string;
   isPlaceholder?: boolean;
@@ -109,16 +110,27 @@ export const cases: CaseStudy[] = [
     liveLabel: "Открыть NutriBot",
     slug: "nutribot-colombia",
   },
-  // Replace with real KVENTA case
   {
-    title: "Автоматизация обработки заявок",
-    industry: "High-ticket services",
-    challenge: "Кейс готовится к публикации",
-    solution: "Структура решения будет добавлена после согласования материалов.",
-    results: "Проверенные показатели появятся здесь.",
-    image: "",
-    isPlaceholder: true,
-    slug: "lead-processing-automation",
+    title: "Don Alejandro — AI-персонажи для Habanos",
+    industry: "LATAM · Russia · AI Creative",
+    challenge: "Создать узнаваемых героев и систему контента для продвижения кубинских сигар на рынках Латинской Америки и России, сохранив премиальный характер и культурный контекст продукта.",
+    solution: "Разработали цифровых персонажей Don Alejandro и Sergey Volkov, их визуальные роли, локализованные видео и статичные креативы, а также конверсионный лендинг для рекламных кампаний.",
+    results: "Собрана масштабируемая creative-система для испаноязычной и русскоязычной аудитории: персонажи связывают рекламные сообщения, контент и посадочную страницу в единый образ бренда.",
+    image: "/cases/habanos/russia-havana.jpg",
+    gallery: [
+      { src: "/cases/habanos/russia-havana.jpg", alt: "Don Alejandro и Sergey Volkov в креативе Habanos для России", width: 800, height: 1200 },
+      { src: "/cases/habanos/don-alejandro-gift.jpg", alt: "Don Alejandro в испаноязычном креативе о кубинских сигарах", width: 675, height: 1200 },
+      { src: "/cases/habanos/don-alejandro-guide.jpg", alt: "Образовательный рекламный креатив с Don Alejandro", width: 675, height: 1200 },
+      { src: "/cases/habanos/don-alejandro-authentic.jpg", alt: "Имиджевый креатив Habanos для рынка Латинской Америки", width: 800, height: 1200 },
+      { src: "/cases/habanos/moscow-campaign.jpg", alt: "Зимний рекламный креатив Habanos для российского рынка", width: 800, height: 1200 },
+    ],
+    videos: [
+      { src: "/cases/habanos/character-creative-01.m4v", poster: "/cases/habanos/don-alejandro-authentic.jpg", alt: "Видеокреатив с AI-персонажем Don Alejandro" },
+      { src: "/cases/habanos/character-creative-02.m4v", poster: "/cases/habanos/russia-havana.jpg", alt: "Видеокреатив с персонажами кампании Habanos" },
+    ],
+    liveUrl: "https://alexleonoff2001-prog.github.io/don-alejandro-landing/",
+    liveLabel: "Посмотреть лендинг",
+    slug: "habanos-ai-characters",
   },
   // Replace with real KVENTA case
   {
