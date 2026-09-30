@@ -257,7 +257,7 @@ export function Methodology() {
 }
 
 export function Cases() {
-  const [featuredCase, habanosCase, ...placeholderCases] = cases;
+  const [featuredCase, habanosCase, supplementsCase] = cases;
   return (
     <section className="section cases-section" id="cases"><div className="container"><div className="section-top"><SectionHeading eyebrow="КЕЙСЫ" title="Результат важнее обещаний." description="Публикуем только те кейсы, где можно показать подтверждённую задачу, работу и эффект без приукрашивания." /><span className="soon-label">Материалы пополняются</span></div>
       <article className="featured-case">
@@ -298,7 +298,30 @@ export function Cases() {
           </div>
         </div>
       </article>
-      <div className="cases-grid placeholder-cases">{placeholderCases.map((item, index) => <article className="case-card" key={item.slug}><div className="case-cover"><span>0{index + 3}</span><div className="case-lines"><i/><i/><i/><i/></div><small>CASE SOON</small></div><div className="case-body"><span>{item.industry}</span><h3>{item.title}</h3><dl><div><dt>Задача</dt><dd>{item.challenge}</dd></div><div><dt>Сделали</dt><dd>{item.solution}</dd></div><div><dt>Результат</dt><dd>{item.results}</dd></div></dl><span className="case-status"><Clock3 /> Кейс скоро появится</span></div></article>)}</div></div>
+      <article className="featured-case supplements-case">
+        <div className="featured-case-copy">
+          <div className="featured-case-label"><span>03 · УСПЕШНЫЙ КЕЙС</span><small>{supplementsCase.industry}</small></div>
+          <h3>{supplementsCase.title}</h3>
+          <p className="featured-case-intro">Две продуктовые коммуникации, адаптированные под аудиторию и performance-механику латиноамериканского рынка.</p>
+          <dl>
+            <div><dt>Задача</dt><dd>{supplementsCase.challenge}</dd></div>
+            <div><dt>Что сделали</dt><dd>{supplementsCase.solution}</dd></div>
+            <div><dt>Результат</dt><dd>{supplementsCase.results}</dd></div>
+          </dl>
+          <div className="case-link-group">
+            {supplementsCase.liveLinks?.map((link) => <a className="case-live-link supplement-link" href={link.url} target="_blank" rel="noreferrer" key={link.url}>{link.label}<ExternalLink /></a>)}
+          </div>
+        </div>
+        <div className="supplements-showcase">
+          <div className="supplement-videos">
+            {supplementsCase.videos?.map((video, index) => <figure key={video.src}><video controls playsInline preload="metadata" poster={video.poster} aria-label={video.alt}><source src={video.src} type="video/x-m4v" /></video><figcaption>{index === 0 ? "LAVITAL · VIDEO" : "NOVASTRONG · VIDEO"}</figcaption></figure>)}
+          </div>
+          <div className="supplement-gallery" aria-label="Статичные креативы Lavital и NovaStrong">
+            {supplementsCase.gallery?.map((image, index) => <figure className={index === 0 ? "supplement-landscape" : ""} key={image.src}><img src={image.src} alt={image.alt} width={image.width} height={image.height} loading="lazy"/><figcaption>{index === 0 || index === 3 ? "NOVASTRONG" : "LAVITAL"} · STATIC</figcaption></figure>)}
+          </div>
+        </div>
+      </article>
+    </div>
     </section>
   );
 }

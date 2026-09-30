@@ -90,6 +90,7 @@ export type CaseStudy = {
   videos?: { src: string; poster: string; alt: string }[];
   liveUrl?: string;
   liveLabel?: string;
+  liveLinks?: { url: string; label: string }[];
   isPlaceholder?: boolean;
   slug: string;
 };
@@ -132,16 +133,28 @@ export const cases: CaseStudy[] = [
     liveLabel: "Посмотреть лендинг",
     slug: "habanos-ai-characters",
   },
-  // Replace with real KVENTA case
   {
-    title: "Performance-система для B2B",
-    industry: "B2B",
-    challenge: "Кейс готовится к публикации",
-    solution: "Структура решения будет добавлена после согласования материалов.",
-    results: "Проверенные показатели появятся здесь.",
-    image: "",
-    isPlaceholder: true,
-    slug: "b2b-performance-system",
+    title: "Lavital & NovaStrong — digital-запуск для LATAM",
+    industry: "LATAM · Supplements · Performance Creative",
+    challenge: "Подготовить два локальных бренда пищевых добавок к продвижению в Латинской Америке: ясно разделить позиционирование продуктов и собрать материалы под performance-трафик.",
+    solution: "Создали конверсионные лендинги, визуальные системы Lavital и NovaStrong, локализованные офферы, видео, статичные креативы и рекламные материалы на испанском языке.",
+    results: "Собран цельный digital-комплект для запуска и тестирования рекламных гипотез: от первого контакта с креативом до продуктовой страницы каждого бренда.",
+    image: "/cases/latam-supplements/novastrong-hero.jpg",
+    gallery: [
+      { src: "/cases/latam-supplements/novastrong-hero.jpg", alt: "Горизонтальный рекламный креатив NovaStrong", width: 1200, height: 675 },
+      { src: "/cases/latam-supplements/lavital-offer.jpg", alt: "Рекламный креатив Lavital с локализованным предложением для Колумбии", width: 960, height: 1200 },
+      { src: "/cases/latam-supplements/lavital-longform.jpg", alt: "Информационный рекламный материал Lavital", width: 800, height: 1200 },
+      { src: "/cases/latam-supplements/novastrong-energy.jpg", alt: "Вертикальный рекламный креатив NovaStrong", width: 768, height: 1200 },
+    ],
+    videos: [
+      { src: "/cases/latam-supplements/lavital-creative.m4v", poster: "/cases/latam-supplements/lavital-offer.jpg", alt: "Видеокреатив Lavital для рынка Латинской Америки" },
+      { src: "/cases/latam-supplements/novastrong-creative.m4v", poster: "/cases/latam-supplements/novastrong-hero.jpg", alt: "Видеокреатив NovaStrong с субтитрами" },
+    ],
+    liveLinks: [
+      { url: "http://lavital.org", label: "Лендинг Lavital" },
+      { url: "https://novastrong.win", label: "Лендинг NovaStrong" },
+    ],
+    slug: "lavital-novastrong-latam",
   },
 ];
 
