@@ -108,20 +108,14 @@ export function LeadForm({ compact = false, buttonText = "Получить бе�
       created_at: new Date().toISOString(),
       form_id: formId,
     };
-    const endpoint = process.env.NEXT_PUBLIC_LEAD_ENDPOINT;
     try {
-      if (endpoint) {
-        const response = await fetch(endpoint, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) });
-        if (!response.ok) throw new Error("Lead endpoint error");
-      } else {
-        await new Promise((resolve) => setTimeout(resolve, 450));
-        console.info("KVENTA lead demo", payload);
-      }
+      const response = await fetch("/api/lead", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) });
+      if (!response.ok) throw new Error("Lead endpoint error");
       window.dispatchEvent(new CustomEvent("kventa_lead_success", { detail: { form_id: formId } }));
       setState("success");
     } catch {
       setState("error");
-      setMessage("Не удалось отправить заявку. Попробуйте ещё раз или свяжитесь с нами напрямую.");
+      setMessage("Не удалось отправить заявку. Попробуйте ещё раз через минуту.");
     }
   };
 
