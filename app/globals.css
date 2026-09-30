@@ -399,7 +399,7 @@ a { color: inherit; text-decoration: none; }
 .final-form { border: 1px solid rgba(255,255,255,.13); padding: 30px; border-radius: 18px; background: rgba(255,255,255,.025); }
 .final-form .lead-form { display: grid; gap: 13px; }
 footer { padding: 64px 0 26px; background: #050807; border-top: 1px solid rgba(255,255,255,.08); }
-.footer-grid { display: grid; grid-template-columns: 1.6fr .8fr .9fr 1fr; gap: 55px; }
+.footer-grid { display: grid; grid-template-columns: 1.6fr .8fr 1fr; gap: 55px; }
 .footer-grid > div { display: flex; flex-direction: column; align-items: flex-start; gap: 9px; }
 .footer-grid > div:first-child p { color: #6f7874; max-width: 300px; font-size: .8rem; margin-top: 14px; }
 .footer-grid strong { font-size: .74rem; letter-spacing: .07em; text-transform: uppercase; margin-bottom: 7px; }
@@ -426,8 +426,7 @@ footer { padding: 64px 0 26px; background: #050807; border-top: 1px solid rgba(2
   .method-flow article:nth-child(4) { border-left: 0; }
   .method-flow article:nth-child(-n+3) { border-bottom: 1px solid #d8dcd9; }
   .industries-grid, .faq-grid { gap: 50px; }
-  .footer-grid { grid-template-columns: 1.4fr 1fr 1fr; }
-  .footer-grid > div:last-child { grid-column: 2 / -1; }
+  .footer-grid { grid-template-columns: 1.4fr .8fr 1fr; }
 }
 
 @media (max-width: 800px) {

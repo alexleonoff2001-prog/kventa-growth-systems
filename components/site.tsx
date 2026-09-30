@@ -26,7 +26,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Brand } from "@/components/brand";
-import { cases, contact, faqs, industries, methodology, navigation, solutions, technologyRow } from "@/app/content";
+import { cases, faqs, industries, methodology, navigation, solutions, technologyRow } from "@/app/content";
 
 const scrollToAudit = () => document.querySelector("#audit")?.scrollIntoView({ behavior: "smooth", block: "start" });
 
@@ -393,7 +393,7 @@ export function FinalCTA() {
 }
 
 export function Footer() {
-  return <footer><div className="container footer-grid"><div><Brand/><p>KVENTA — системы привлечения и автоматизации клиентов для растущего бизнеса.</p></div><div><strong>Навигация</strong>{navigation.slice(0,4).map((item) => <a key={item.href} href={item.href}>{item.label}</a>)}</div><div><strong>Контакты</strong><a href={`mailto:${contact.email}`}>{contact.email}</a><span>{contact.phone}</span><small>{contact.legal}</small></div><div><strong>Документы</strong><a href="#">Политика конфиденциальности</a><a href="#">Согласие на обработку данных</a></div></div><div className="container footer-bottom"><span>© {new Date().getFullYear()} KVENTA Growth Systems</span><span>Marketing × AI × Automation</span></div></footer>;
+  return <footer><div className="container footer-grid"><div><Brand/><p>KVENTA — системы привлечения и автоматизации клиентов для растущего бизнеса.</p></div><div><strong>Навигация</strong>{navigation.map((item) => <a key={item.href} href={item.href}>{item.label}</a>)}</div><div><strong>Документы</strong><a href="#">Политика конфиденциальности</a><a href="#">Согласие на обработку данных</a></div></div><div className="container footer-bottom"><span>© {new Date().getFullYear()} KVENTA Growth Systems</span><span>Marketing × AI × Automation</span></div></footer>;
 }
 
 export function MobileCTA() { return <button className="mobile-sticky-cta" onClick={scrollToAudit}>Получить бесплатный аудит <ArrowRight /></button>; }

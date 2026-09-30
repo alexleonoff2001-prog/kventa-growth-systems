@@ -18,7 +18,6 @@ export const navigation = [
   { label: "Как работаем", href: "#method" },
   { label: "Кейсы", href: "#cases" },
   { label: "О KVENTA", href: "#about" },
-  { label: "Контакты", href: "#contact" },
 ];
 
 export const technologyRow = [
@@ -191,9 +190,3 @@ export const faqs = [
     answer: "Основные направления — Яндекс Директ и Telegram Ads. Конкретный канал подбираем под задачу и целевую аудиторию.",
   },
 ];
-
-export const contact = {
-  email: "hello@kventa.ru",
-  phone: "+7 (___) ___-__-__",
-  legal: "Реквизиты компании будут добавлены",
-};
