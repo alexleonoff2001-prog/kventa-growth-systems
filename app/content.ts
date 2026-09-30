@@ -86,20 +86,30 @@ export type CaseStudy = {
   solution: string;
   results: string;
   image: string;
+  gallery?: { src: string; alt: string; width: number; height: number }[];
+  liveUrl?: string;
+  liveLabel?: string;
+  isPlaceholder?: boolean;
   slug: string;
 };
 
-// Replace with real KVENTA case
 export const cases: CaseStudy[] = [
   {
-    title: "Система привлечения для клиники",
-    industry: "Медицина",
-    challenge: "Кейс готовится к публикации",
-    solution: "Структура решения будет добавлена после согласования материалов.",
-    results: "Проверенные показатели появятся здесь.",
-    image: "",
-    slug: "medical-growth-system",
+    title: "NutriBot — AI-сервис подсчёта КБЖУ",
+    industry: "Colombia · Telegram · AI",
+    challenge: "Сделать ежедневный контроль питания простым: без ручного поиска продуктов, сложных таблиц и долгого заполнения дневника.",
+    solution: "Разработали Telegram-сервис для колумбийского рынка. Пользователь отправляет фото блюда или описывает его текстом, а AI оценивает калории, белки, жиры и углеводы с учётом всей порции.",
+    results: "Запущен работающий продукт с дневными целями, историей записей, ежедневной сводкой и локализацией под привычные продукты и порции Колумбии.",
+    image: "/cases/nutribot-telegram.jpg",
+    gallery: [
+      { src: "/cases/nutribot-telegram.jpg", alt: "Интерфейс NutriFoto в Telegram для подсчёта калорий и макронутриентов", width: 552, height: 1200 },
+      { src: "/cases/nutribot-workflow.png", alt: "Схема автоматизации NutriBot: Telegram, AI-анализ, база данных и подписки", width: 1800, height: 979 },
+    ],
+    liveUrl: "https://telegram.me/NutriFotoAI_bot",
+    liveLabel: "Открыть NutriBot",
+    slug: "nutribot-colombia",
   },
+  // Replace with real KVENTA case
   {
     title: "Автоматизация обработки заявок",
     industry: "High-ticket services",
@@ -107,8 +117,10 @@ export const cases: CaseStudy[] = [
     solution: "Структура решения будет добавлена после согласования материалов.",
     results: "Проверенные показатели появятся здесь.",
     image: "",
+    isPlaceholder: true,
     slug: "lead-processing-automation",
   },
+  // Replace with real KVENTA case
   {
     title: "Performance-система для B2B",
     industry: "B2B",
@@ -116,6 +128,7 @@ export const cases: CaseStudy[] = [
     solution: "Структура решения будет добавлена после согласования материалов.",
     results: "Проверенные показатели появятся здесь.",
     image: "",
+    isPlaceholder: true,
     slug: "b2b-performance-system",
   },
 ];
@@ -159,4 +172,3 @@ export const contact = {
   phone: "+7 (___) ___-__-__",
   legal: "Реквизиты компании будут добавлены",
 };
-

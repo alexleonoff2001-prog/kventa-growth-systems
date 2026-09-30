@@ -10,6 +10,7 @@ import {
   ChevronRight,
   CircleCheck,
   Clock3,
+  ExternalLink,
   Gauge,
   Menu,
   MessageSquareText,
@@ -256,9 +257,27 @@ export function Methodology() {
 }
 
 export function Cases() {
+  const [featuredCase, ...placeholderCases] = cases;
   return (
-    <section className="section cases-section" id="cases"><div className="container"><div className="section-top"><SectionHeading eyebrow="КЕЙСЫ" title="Результат важнее обещаний." description="Публикуем только те кейсы, где можно показать подтверждённую задачу, работу и эффект без приукрашивания." /><span className="soon-label">Материалы готовятся</span></div>
-      <div className="cases-grid">{cases.map((item, index) => <article className="case-card" key={item.slug}><div className="case-cover"><span>0{index + 1}</span><div className="case-lines"><i/><i/><i/><i/></div><small>CASE SOON</small></div><div className="case-body"><span>{item.industry}</span><h3>{item.title}</h3><dl><div><dt>Задача</dt><dd>{item.challenge}</dd></div><div><dt>Сделали</dt><dd>{item.solution}</dd></div><div><dt>Результат</dt><dd>{item.results}</dd></div></dl><span className="case-status"><Clock3 /> Кейс скоро появится</span></div></article>)}</div></div>
+    <section className="section cases-section" id="cases"><div className="container"><div className="section-top"><SectionHeading eyebrow="КЕЙСЫ" title="Результат важнее обещаний." description="Публикуем только те кейсы, где можно показать подтверждённую задачу, работу и эффект без приукрашивания." /><span className="soon-label">Материалы пополняются</span></div>
+      <article className="featured-case">
+        <div className="featured-case-copy">
+          <div className="featured-case-label"><span>01 · УСПЕШНЫЙ КЕЙС</span><small>{featuredCase.industry}</small></div>
+          <h3>{featuredCase.title}</h3>
+          <p className="featured-case-intro">AI-продукт, который превращает привычный чат в персональный дневник питания.</p>
+          <dl>
+            <div><dt>Задача</dt><dd>{featuredCase.challenge}</dd></div>
+            <div><dt>Что сделали</dt><dd>{featuredCase.solution}</dd></div>
+            <div><dt>Продукт</dt><dd>{featuredCase.results}</dd></div>
+          </dl>
+          {featuredCase.liveUrl && <a className="case-live-link" href={featuredCase.liveUrl} target="_blank" rel="noreferrer">{featuredCase.liveLabel}<ExternalLink /></a>}
+        </div>
+        <div className="featured-case-gallery">
+          {featuredCase.gallery?.map((image, index) => <figure className={index === 0 ? "bot-screen" : "workflow-screen"} key={image.src}><img src={image.src} alt={image.alt} width={image.width} height={image.height} loading="lazy"/><figcaption>{index === 0 ? "Опыт пользователя" : "Архитектура автоматизации"}</figcaption></figure>)}
+          <div className="case-flow-badge"><span>PHOTO / TEXT</span><ArrowRight/><span>AI ANALYSIS</span><ArrowRight/><span>DAILY SUMMARY</span></div>
+        </div>
+      </article>
+      <div className="cases-grid placeholder-cases">{placeholderCases.map((item, index) => <article className="case-card" key={item.slug}><div className="case-cover"><span>0{index + 2}</span><div className="case-lines"><i/><i/><i/><i/></div><small>CASE SOON</small></div><div className="case-body"><span>{item.industry}</span><h3>{item.title}</h3><dl><div><dt>Задача</dt><dd>{item.challenge}</dd></div><div><dt>Сделали</dt><dd>{item.solution}</dd></div><div><dt>Результат</dt><dd>{item.results}</dd></div></dl><span className="case-status"><Clock3 /> Кейс скоро появится</span></div></article>)}</div></div>
     </section>
   );
 }
