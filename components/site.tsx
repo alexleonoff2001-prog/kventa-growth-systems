@@ -29,12 +29,12 @@ import { Brand } from "@/components/brand";
 import { cases, faqs, industries, methodology, navigation, solutions, technologyRow } from "@/app/content";
 
 declare const __KVENTA_GITHUB_PAGES__: boolean;
+declare const __KVENTA_LEAD_ENDPOINT__: string;
 
 const isGithubPagesBuild = typeof __KVENTA_GITHUB_PAGES__ !== "undefined" && __KVENTA_GITHUB_PAGES__;
 const scrollToAudit = () => document.querySelector("#audit")?.scrollIntoView({ behavior: "smooth", block: "start" });
-const assetPath = (path: string) => isGithubPagesBuild
-  ? `/kventa-growth-systems${path}`
-  : path;
+const staticBasePath = isGithubPagesBuild ? import.meta.env.BASE_URL.replace(/\/$/, "") : "";
+const assetPath = (path: string) => staticBasePath ? `${staticBasePath}${path}` : path;
 
 function SectionHeading({ eyebrow, title, description, centered = false }: { eyebrow: string; title: string; description?: string; centered?: boolean }) {
   return (
@@ -115,8 +115,8 @@ export function LeadForm({ compact = false, buttonText = "Получить бе�
       form_id: formId,
     };
     try {
-      const endpoint = isGithubPagesBuild
-        ? "https://kventa-growth-systems.alexleonoff2001.chatgpt.site/api/lead"
+      const endpoint = typeof __KVENTA_LEAD_ENDPOINT__ !== "undefined"
+        ? __KVENTA_LEAD_ENDPOINT__
         : "/api/lead";
       const response = await fetch(endpoint, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) });
       if (!response.ok) throw new Error("Lead endpoint error");

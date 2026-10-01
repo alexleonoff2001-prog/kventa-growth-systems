@@ -4,11 +4,11 @@ import path from "node:path";
 
 export default defineConfig({
   root: path.resolve(__dirname, "github-pages"),
-  base: "/kventa-growth-systems/",
+  base: "/",
   plugins: [react()],
   define: {
     __KVENTA_GITHUB_PAGES__: "true",
-    __KVENTA_LEAD_ENDPOINT__: JSON.stringify("https://kventa-growth-systems.alexleonoff2001.chatgpt.site/api/lead"),
+    __KVENTA_LEAD_ENDPOINT__: JSON.stringify("/api/lead"),
   },
   resolve: {
     alias: {
@@ -17,7 +17,7 @@ export default defineConfig({
   },
   publicDir: path.resolve(__dirname, "public"),
   build: {
-    outDir: path.resolve(__dirname, "dist-pages"),
+    outDir: path.resolve(__dirname, "dist-cloudflare"),
     emptyOutDir: true,
   },
 });
