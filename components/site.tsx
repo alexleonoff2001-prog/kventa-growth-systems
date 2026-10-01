@@ -28,7 +28,13 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { Brand } from "@/components/brand";
 import { cases, faqs, industries, methodology, navigation, solutions, technologyRow } from "@/app/content";
 
+declare const __KVENTA_GITHUB_PAGES__: boolean;
+
+const isGithubPagesBuild = typeof __KVENTA_GITHUB_PAGES__ !== "undefined" && __KVENTA_GITHUB_PAGES__;
 const scrollToAudit = () => document.querySelector("#audit")?.scrollIntoView({ behavior: "smooth", block: "start" });
+const assetPath = (path: string) => isGithubPagesBuild
+  ? `/kventa-growth-systems${path}`
+  : path;
 
 function SectionHeading({ eyebrow, title, description, centered = false }: { eyebrow: string; title: string; description?: string; centered?: boolean }) {
   return (
@@ -109,7 +115,10 @@ export function LeadForm({ compact = false, buttonText = "Получить бе�
       form_id: formId,
     };
     try {
-      const response = await fetch("/api/lead", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) });
+      const endpoint = isGithubPagesBuild
+        ? "https://kventa-growth-systems.alexleonoff2001.chatgpt.site/api/lead"
+        : "/api/lead";
+      const response = await fetch(endpoint, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) });
       if (!response.ok) throw new Error("Lead endpoint error");
       window.dispatchEvent(new CustomEvent("kventa_lead_success", { detail: { form_id: formId } }));
       setState("success");
@@ -267,8 +276,8 @@ export function Cases() {
     };
   }, [lightbox]);
 
-  const openImage = (src: string, alt: string) => setLightbox({ src, alt, type: "image" });
-  const openVideo = (src: string, alt: string) => setLightbox({ src, alt, type: "video" });
+  const openImage = (src: string, alt: string) => setLightbox({ src: assetPath(src), alt, type: "image" });
+  const openVideo = (src: string, alt: string) => setLightbox({ src: assetPath(src), alt, type: "video" });
   return (
     <section className="section cases-section" id="cases"><div className="container"><div className="section-top"><SectionHeading eyebrow="КЕЙСЫ" title="Результат важнее обещаний." description="Публикуем только те кейсы, где можно показать подтверждённую задачу, работу и эффект без приукрашивания." /><span className="soon-label">Материалы пополняются</span></div>
       <article className="featured-case">
@@ -284,7 +293,7 @@ export function Cases() {
           {featuredCase.liveUrl && <a className="case-live-link" href={featuredCase.liveUrl} target="_blank" rel="noreferrer">{featuredCase.liveLabel}<ExternalLink /></a>}
         </div>
         <div className="featured-case-gallery">
-          {featuredCase.gallery?.map((image, index) => <figure className={index === 0 ? "bot-screen" : "workflow-screen"} key={image.src}><button className="creative-open" type="button" onClick={() => openImage(image.src, image.alt)} aria-label={`Открыть полностью: ${image.alt}`}><img src={image.src} alt={image.alt} width={image.width} height={image.height} loading="lazy"/><span className="creative-expand"><Maximize2/>Открыть</span></button><figcaption>{index === 0 ? "Опыт пользователя" : "Архитектура автоматизации"}</figcaption></figure>)}
+          {featuredCase.gallery?.map((image, index) => <figure className={index === 0 ? "bot-screen" : "workflow-screen"} key={image.src}><button className="creative-open" type="button" onClick={() => openImage(image.src, image.alt)} aria-label={`Открыть полностью: ${image.alt}`}><img src={assetPath(image.src)} alt={image.alt} width={image.width} height={image.height} loading="lazy"/><span className="creative-expand"><Maximize2/>Открыть</span></button><figcaption>{index === 0 ? "Опыт пользователя" : "Архитектура автоматизации"}</figcaption></figure>)}
           <div className="case-flow-badge"><span>PHOTO / TEXT</span><ArrowRight/><span>AI ANALYSIS</span><ArrowRight/><span>DAILY SUMMARY</span></div>
         </div>
       </article>
@@ -302,10 +311,10 @@ export function Cases() {
         </div>
         <div className="habanos-showcase">
           <div className="habanos-videos">
-            {habanosCase.videos?.map((video, index) => <figure key={video.src}><video controls playsInline preload="metadata" poster={video.poster} aria-label={video.alt}><source src={video.src} type="video/x-m4v" /></video><button className="video-expand" type="button" onClick={() => openVideo(video.src, video.alt)} aria-label={`Открыть видео полностью: ${video.alt}`}><Maximize2/></button><figcaption>VIDEO CREATIVE · 0{index + 1}</figcaption></figure>)}
+            {habanosCase.videos?.map((video, index) => <figure key={video.src}><video controls playsInline preload="metadata" poster={assetPath(video.poster)} aria-label={video.alt}><source src={assetPath(video.src)} type="video/x-m4v" /></video><button className="video-expand" type="button" onClick={() => openVideo(video.src, video.alt)} aria-label={`Открыть видео полностью: ${video.alt}`}><Maximize2/></button><figcaption>VIDEO CREATIVE · 0{index + 1}</figcaption></figure>)}
           </div>
           <div className="habanos-static-strip" aria-label="Статичные креативы кампании">
-            {habanosCase.gallery?.map((image, index) => <figure key={image.src}><button className="creative-open" type="button" onClick={() => openImage(image.src, image.alt)} aria-label={`Открыть полностью: ${image.alt}`}><img src={image.src} alt={image.alt} width={image.width} height={image.height} loading="lazy"/><span className="creative-expand"><Maximize2/>Открыть</span></button><figcaption>STATIC · 0{index + 1}</figcaption></figure>)}
+            {habanosCase.gallery?.map((image, index) => <figure key={image.src}><button className="creative-open" type="button" onClick={() => openImage(image.src, image.alt)} aria-label={`Открыть полностью: ${image.alt}`}><img src={assetPath(image.src)} alt={image.alt} width={image.width} height={image.height} loading="lazy"/><span className="creative-expand"><Maximize2/>Открыть</span></button><figcaption>STATIC · 0{index + 1}</figcaption></figure>)}
           </div>
         </div>
       </article>
@@ -325,10 +334,10 @@ export function Cases() {
         </div>
         <div className="supplements-showcase">
           <div className="supplement-videos">
-            {supplementsCase.videos?.map((video, index) => <figure key={video.src}><video controls playsInline preload="metadata" poster={video.poster} aria-label={video.alt}><source src={video.src} type="video/x-m4v" /></video><button className="video-expand" type="button" onClick={() => openVideo(video.src, video.alt)} aria-label={`Открыть видео полностью: ${video.alt}`}><Maximize2/></button><figcaption>{index === 0 ? "LAVITAL · VIDEO" : "NOVASTRONG · VIDEO"}</figcaption></figure>)}
+            {supplementsCase.videos?.map((video, index) => <figure key={video.src}><video controls playsInline preload="metadata" poster={assetPath(video.poster)} aria-label={video.alt}><source src={assetPath(video.src)} type="video/x-m4v" /></video><button className="video-expand" type="button" onClick={() => openVideo(video.src, video.alt)} aria-label={`Открыть видео полностью: ${video.alt}`}><Maximize2/></button><figcaption>{index === 0 ? "LAVITAL · VIDEO" : "NOVASTRONG · VIDEO"}</figcaption></figure>)}
           </div>
           <div className="supplement-gallery" aria-label="Статичные креативы Lavital и NovaStrong">
-            {supplementsCase.gallery?.map((image, index) => <figure className={index === 0 ? "supplement-landscape" : ""} key={image.src}><button className="creative-open" type="button" onClick={() => openImage(image.src, image.alt)} aria-label={`Открыть полностью: ${image.alt}`}><img src={image.src} alt={image.alt} width={image.width} height={image.height} loading="lazy"/><span className="creative-expand"><Maximize2/>Открыть</span></button><figcaption>{index === 0 || index === 3 ? "NOVASTRONG" : "LAVITAL"} · STATIC</figcaption></figure>)}
+            {supplementsCase.gallery?.map((image, index) => <figure className={index === 0 ? "supplement-landscape" : ""} key={image.src}><button className="creative-open" type="button" onClick={() => openImage(image.src, image.alt)} aria-label={`Открыть полностью: ${image.alt}`}><img src={assetPath(image.src)} alt={image.alt} width={image.width} height={image.height} loading="lazy"/><span className="creative-expand"><Maximize2/>Открыть</span></button><figcaption>{index === 0 || index === 3 ? "NOVASTRONG" : "LAVITAL"} · STATIC</figcaption></figure>)}
           </div>
         </div>
       </article>
