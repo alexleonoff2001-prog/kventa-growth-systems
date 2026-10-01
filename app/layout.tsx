@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://kventa.ru"),
+  metadataBase: new URL("https://kventa.org"),
   title: "KVENTA — маркетинг, AI и автоматизация для роста бизнеса",
   description: "KVENTA строит системы привлечения и автоматизации клиентов: Яндекс Директ, сайты, CRM, AI-агенты, контент и бизнес-автоматизация.",
   alternates: { canonical: "/" },
