@@ -54,13 +54,13 @@ export async function POST(request: Request) {
       method: "POST",
       headers: { "Content-Type": "text/plain;charset=utf-8" },
       body: JSON.stringify({ token: webhookToken, id, name, phone }),
-      redirect: "follow",
+      // Apps Script web apps acknowledge a successful POST with a redirect to
+      // their ContentService response. Following that redirect from a Worker can
+      // produce a false 5xx even though the row has already been written.
+      redirect: "manual",
     });
-    // Google ContentService may proxy the response through a redirect whose body
-    // is not exposed consistently in every runtime. A successful HTTP response
-    // is sufficient here: input is already validated server-side and the webhook
-    // token is injected only from the private environment.
-    if (!response.ok) {
+    const acceptedByAppsScript = response.ok || (response.status >= 300 && response.status < 400);
+    if (!acceptedByAppsScript) {
       return json(request, { ok: false, error: "lead_storage_failed" }, 502);
     }
 
