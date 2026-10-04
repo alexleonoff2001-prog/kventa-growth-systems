@@ -26,7 +26,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Brand } from "@/components/brand";
-import { cases, faqs, industries, methodology, navigation, solutions, technologyRow } from "@/app/content";
+import { cases, faqs, founder, industries, methodology, navigation, solutions, technologyRow } from "@/app/content";
 
 declare const __KVENTA_GITHUB_PAGES__: boolean;
 declare const __KVENTA_LEAD_ENDPOINT__: string;
@@ -247,7 +247,29 @@ export function AutomationFlow() {
 export function PerformanceBackground() {
   const skills = ["Marketing", "Creative", "Funnels", "Automation", "Analytics", "AI"];
   return (
-    <section className="section performance-section" id="about"><div className="container performance-grid"><div className="performance-stat"><strong>3+</strong><span>YEARS OF<br/>PERFORMANCE<br/>EXPERIENCE</span><div className="market-tags"><b>LATAM</b><b>ENGLISH-SPEAKING MARKETS</b></div></div><div className="performance-copy"><SectionHeading eyebrow="НАШ ФУНДАМЕНТ" title="Из performance marketing — в системный рост бизнеса" /><p>В основе KVENTA — команда с трёхлетним опытом performance и affiliate marketing на рынках Латинской Америки и англоязычных стран.</p><p>В этой среде невозможно спрятаться за красивыми отчётами: каждая гипотеза измеряется стоимостью трафика, конверсией, выручкой и масштабируемостью.</p><p>Мы самостоятельно закрывали весь цикл — от анализа рынка и рекламных связок до лендингов, креативов, аналитики и автоматизации. Сегодня этот подход используем для развития российских компаний.</p><div className="skill-tags">{skills.map((skill) => <span key={skill}>{skill}</span>)}</div></div></div>
+    <section className="section performance-section" id="about">
+      <div className="container">
+        <div className="performance-grid">
+          <div className="performance-stat"><strong>3+</strong><span>YEARS OF<br/>PERFORMANCE<br/>EXPERIENCE</span><div className="market-tags"><b>LATAM</b><b>ENGLISH-SPEAKING MARKETS</b></div></div>
+          <div className="performance-copy"><SectionHeading eyebrow="НАШ ФУНДАМЕНТ" title="Из performance marketing — в системный рост бизнеса" /><p>В основе KVENTA — команда с трёхлетним опытом performance и affiliate marketing на рынках Латинской Америки и англоязычных стран.</p><p>В этой среде невозможно спрятаться за красивыми отчётами: каждая гипотеза измеряется стоимостью трафика, конверсией, выручкой и масштабируемостью.</p><p>Мы самостоятельно закрывали весь цикл — от анализа рынка и рекламных связок до лендингов, креативов, аналитики и автоматизации. Сегодня этот подход используем для развития российских компаний.</p><div className="skill-tags">{skills.map((skill) => <span key={skill}>{skill}</span>)}</div></div>
+        </div>
+        <article className="founder-card">
+          <div className="founder-photo">
+            <img src={assetPath(founder.image)} alt={`${founder.name}, основатель KVENTA`} loading="lazy" />
+            <div className="founder-photo-label"><span>FOUNDER</span><strong>{founder.name}</strong></div>
+          </div>
+          <div className="founder-copy">
+            <span className="eyebrow">ЛИЧНАЯ ЭКСПЕРТИЗА</span>
+            <p className="founder-role">{founder.role}</p>
+            <h3>{founder.title}</h3>
+            <div className="founder-text">{founder.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}</div>
+            <blockquote>«{founder.quote}»</blockquote>
+            <a className="founder-telegram" href={founder.telegram} target="_blank" rel="noreferrer">
+              <Send /> Написать Александру в Telegram <ExternalLink />
+            </a>
+          </div>
+        </article>
+      </div>
     </section>
   );
 }
