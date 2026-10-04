@@ -1,9 +1,14 @@
-const githubPagesOrigin = "https://alexleonoff2001-prog.github.io";
+const primaryOrigin = "https://kventa.org";
+const allowedOrigins = new Set([
+  primaryOrigin,
+  "https://www.kventa.org",
+  "https://alexleonoff2001-prog.github.io",
+  "https://alexleonoff2001-prog-kventa-growth-systems-bb90.twc1.net",
+]);
 
 function corsHeaders(request: Request) {
   const origin = request.headers.get("origin");
-  const siteOrigin = new URL(request.url).origin;
-  const allowedOrigin = origin === siteOrigin || origin === githubPagesOrigin ? origin : siteOrigin;
+  const allowedOrigin = origin && allowedOrigins.has(origin) ? origin : primaryOrigin;
 
   return {
     "Access-Control-Allow-Origin": allowedOrigin,
@@ -19,8 +24,7 @@ function json(request: Request, body: Record<string, unknown>, status: number) {
 
 export async function OPTIONS(request: Request) {
   const origin = request.headers.get("origin");
-  const siteOrigin = new URL(request.url).origin;
-  if (origin !== siteOrigin && origin !== githubPagesOrigin) {
+  if (origin && !allowedOrigins.has(origin)) {
     return json(request, { ok: false, error: "forbidden_origin" }, 403);
   }
   return new Response(null, { status: 204, headers: corsHeaders(request) });
@@ -28,8 +32,7 @@ export async function OPTIONS(request: Request) {
 
 export async function POST(request: Request) {
   const requestOrigin = request.headers.get("origin");
-  const siteOrigin = new URL(request.url).origin;
-  if (requestOrigin && requestOrigin !== siteOrigin && requestOrigin !== githubPagesOrigin) {
+  if (requestOrigin && !allowedOrigins.has(requestOrigin)) {
     return json(request, { ok: false, error: "forbidden_origin" }, 403);
   }
 
